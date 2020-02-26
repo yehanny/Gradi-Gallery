@@ -16,11 +16,11 @@ En **Gradiweb** hacemos un concurso anual de fotografia, ya tenemos todas las im
 **5** Las imágenes de deben cargar dinamicamente en el evento scroll de la página.
 **6** El sitio debe ser 100% responsivo
 
-**7** Los datos que debes consumir para desarrollar nuestra landing, los encuentras en /api/gradiAuthors.json [GitHub Pages](https://github.com/msoler18/Gradi-Gallery/blob/master/api/gradiAuthors.json).
+**7** Los datos que debes consumir para desarrollar nuestra landing, los encuentras en [/api/gradiAuthors.json](https://github.com/msoler18/Gradi-Gallery/blob/master/api/gradiAuthors.json).
 
 **8** Al finalizar el desarrollo, debes publicarlo en github pages.
 
-##Criterios a evaluar en el proyecto:\
+## Criterios a evaluar en el proyecto:
 
 **-** Uso de preprocesadores + *10pts*
 
@@ -36,7 +36,7 @@ En **Gradiweb** hacemos un concurso anual de fotografia, ya tenemos todas las im
 
 **-** Uso de fuentes y recursos adicionales + *10pts*
 
-##Te disminuye puntos:
+## Te disminuye puntos:
 
 ~~Uso de jQuery~~
 
@@ -44,5 +44,5 @@ En **Gradiweb** hacemos un concurso anual de fotografia, ya tenemos todas las im
 
 Es indispensable tener el proyecto publicado en github pages y por consiguiente en un repo remoto de github, de lo contrario no será posible evaluar tus resultados. 
 
-##¡Mucho éxito Dev!
+### ¡Mucho éxito Dev!
 
