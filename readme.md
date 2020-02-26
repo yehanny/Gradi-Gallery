@@ -14,6 +14,7 @@ En **Gradiweb** hacemos un concurso anual de fotografia, ya tenemos todas las im
 **4** Cuando el usuario realice :hover en una imagen, la imagen se debe redimensionar, tener un background de color #00D664, y mostrar el id y el nombre del autor, junto con el logo blanco de gradiweb.
 
 **5** Las imágenes de deben cargar dinamicamente en el evento scroll de la página.
+
 **6** El sitio debe ser 100% responsivo
 
 **7** Los datos que debes consumir para desarrollar nuestra landing, los encuentras en [/api/gradiAuthors.json](https://github.com/msoler18/Gradi-Gallery/blob/master/api/gradiAuthors.json).
