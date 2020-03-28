@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Gallery Pictures Example</title>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/blueimp-gallery@2.27.0/css/blueimp-gallery.min.css">
+</head>
+<body>
+    <div id="app">
+
+        <gallery :images="images" :index="index" @close="index = null"></gallery>
+
+        <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
+
+        <div
+            class="image"
+            v-for="(image, indexImage) in images"
+            @click="index = indexImage"
+            :style="{ backgroundImage: 'url(' + image.url + ')', width: '300px', height: '200px' }"
+            >
+        </div>
+
+            
+        </div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="https://unpkg.com/blueimp-gallery@2.27.0/js/blueimp-helper.js"></script>
+<script type="text/javascript" src="https://unpkg.com/blueimp-gallery@2.27.0/js/blueimp-gallery.js"></script>
+<script type="text/javascript" src="https://unpkg.com/blueimp-gallery@2.27.0/js/blueimp-gallery-fullscreen.js"></script>
+<script type="text/javascript" src="js/vue-gallery.js"></script>
+<script type="text/javascript" src="js/axios.js"></script>
+<script type="text/javascript" src="js/vue-infinite-scroll.js"></script>
+
+<script>
+    /* Loading de object's source */
+    const json = 'api/gradiAuthors1.json'; 
+
+    new Vue({
+    el: '#app',
+    data: function () {
+        return {
+            images: [],
+            index: null,
+            limit: 9,
+            busy: false
+        };
+    },
+    components: {
+    'gallery': VueGallery
+    },
+    methods: {
+    /* Method to load more items on scroll down */
+    loadMore() {
+        if(! this.busy){
+            this.busy = true;   
+                axios.get(json).then(res => {
+                    const append = res.data.slice(this.images.length,this.images.length + this.limit )         
+                    this.images = this.images.concat(append);
+                    this.busy = false;
+                }).catch( (err) => {
+                    this.busy = false;
+                })
+            }
+        },
+    },
+    mounted() {
+        /* Running the method on start */ 
+        this.loadMore();
+    },
+});
+</script>
+</body>
+</html>

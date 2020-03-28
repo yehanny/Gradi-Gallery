@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradiWeb Gallery</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Development testing for GradiWeb">
+    <meta name="keywords" content="GradiWeb, Gallery">
+    <meta name="author" content="Yehanny Olivares">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/blueimp-gallery.min.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="logo-img">
+                    <img src="assets/img/logo-full.png">
+                </div>
+            </div>
+                
+            <div class="row">
+
+                <gallery :images="images" :options="options" :index="index" @close="index = null"></gallery>
+                
+                <!-- Container of infinite scroll using vue-infinite-scroll library -->
+                <div class="images-container" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
+                    <div
+                    class="images-card image-skew col-md-4 col-sm-6 col-xl-3 col-12"
+                    v-for="(image, imageIndex) in images"
+                    :key="imageIndex"
+                    @click="index = imageIndex"
+                    :style="{ backgroundImage: 'url(' + image + ')', width: 'auto' }"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/axios.js"></script>
+<script type="text/javascript" src="js/vue-infinite-scroll.js"></script>
+<script type="text/javascript" src="js/blueimp-helper.js"></script>
+<script type="text/javascript" src="js/blueimp-gallery.js"></script>
+<script type="text/javascript" src="js/blueimp-gallery-fullscreen.js"></script>
+<script type="text/javascript" src="js/vue-gallery.js"></script>
+
+<script>
+    /* Loading de object's source */
+    const json = 'api/gradiAuthors1.json';
+
+    new Vue({
+    el: '#app',
+        data: function() {
+        return {
+            images: [],
+            limit: 9,
+            busy: false,
+            options: {
+                fullScreen:false,
+            },
+            index: null,
+        }
+    },
+    components: {
+        'gallery': VueGallery
+    },
+    methods: {
+        /* Method to load more items on scroll down */
+        loadMore() {
+            if(! this.busy){
+                this.busy = true;   
+                    axios.get(json).then(res => {
+                        const append = res.data.slice(this.images.length,this.images.length + this.limit);
+                        append.forEach(item => {
+                            console.log('URL: ' + item.url);
+                            this.images = this.images.concat(item.url);
+                        });
+
+                        this.busy = false;
+                    }).catch( (err) => {
+                        this.busy = false;
+                    })
+                }
+            },
+        },
+        mounted() {
+            /* Running the method on start */ 
+            this.loadMore();
+        }
+    });
+</script>
+    
+</body>
+</html>

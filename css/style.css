@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+.images-container {
+  width: 100vw;
+  max-width: 1200px;
+  padding-bottom: 30px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 15px;
+}
+
+.images-item {
+  width: 25%;
+  padding: 1%;
+  animation-duration: 2s;
+  animation-fill-mode: both;
+  animation-name: fadeInUp;
+  list-style-type: none;
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10%) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0%) scale(1.0);
+  }
+}
+
+.images-card {
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: -15px;
+  margin-right: 20px;
+  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);
+}
+
+.logo-img {
+  width: 100%;
+  text-align: center;
+  padding: 2em;
+}
+
+@media (min-width:1200px) {
+  .images-card {
+    height: 192px;
+  }
+  .col-xl-3 {
+    -ms-flex: 0 0 23% !important;
+    flex: 0 0 23% !important;
+    max-width: 23% !important;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1200px) {
+  .images-card {
+    height: 215px;
+  }
+  .col-md-4 {
+    -ms-flex: 0 0 30.69% !important;
+    flex: 0 0 30.69% !important;
+    max-width: 30.69% !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .images-card {
+    height: 163px;
+  }
+  .col-md-4 {
+    -ms-flex: 0 0 30.49% !important;
+    flex: 0 0 30.49% !important;
+    max-width: 49% !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .images-card {
+    height: 182px;
+  }
+  .logo-img img {
+    max-width: 300px;
+  }
+  .col-sm-6 {
+    -ms-flex: 0 0 46% !important;
+    flex: 0 0 46% !important;
+    max-width: 46% !important;
+  }
+}
+
+@media (min-width: 479px) and (max-width: 576px) {
+  .images-card {
+    height: 255px;
+  }
+  .logo-img img {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 479px) {
+  .images-card {
+    height: 265px;
+  }
+  .logo-img img {
+    max-width: 300px;
+  }
+}
