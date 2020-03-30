@@ -7,7 +7,11 @@ En **Gradiweb** hacemos un concurso anual de fotografia, ya tenemos todas las im
 
 **2** El diseño debe ser igual al siguiente mockup:
 
+<<<<<<< HEAD
 ![alt text](https://github.com/msoler18/Gradi-Gallery/blob/master/gradiweb_gallery_mockups.jpg)
+=======
+![alt text](https://github.com/msoler18/Gradi-Gallery/blob/master/gradiweb_gallery_moqups.jpg)
+>>>>>>> d7e3b89cc905ffeb73048d22f4d0a3afcd390381
 
 **3** Los logos los puedes encontrar en la carpeta /assets/img
 
