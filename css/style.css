@@ -46,11 +46,51 @@ body {
   clip-path: polygon(0 20%, 100% 0, 100% 80%, 0% 100%);
 }
 
+
+.imageinfo {
+  width: 100px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: green;
+  height: inherit;
+  padding: 2%;
+}
+
 .logo-img {
   width: 100%;
   text-align: center;
   padding: 2em;
 }
+
+/* Hover effects on gallery */
+
+ul li:hover {
+  transform: scale(1.6);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  transition:all .4s ease-in-out;
+  cursor: pointer;
+}
+
+ul li:hover .imageinfo {
+  opacity: 0;
+  transition: all .4 ease-in-out;
+}
+
+.images-card .overlay {
+  opacity: 0;
+  background-color:#00D664;
+  -webkit-transition:all .4s ease-in-out;
+  transition:all .4s ease-in-out
+}
+
+.images-card:hover .overlay {
+  opacity:1;
+  filter:alpha(opacity=100);
+}
+
+/* Responsive features */ 
 
 @media (min-width:1200px) {
   .images-card {

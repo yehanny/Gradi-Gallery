@@ -23,23 +23,28 @@
                 
             <div class="row">
 
-                <gallery :images="images" :options="options" :index="index" @close="index = null"></gallery>
+                <gallery :images="download_url" :options="options" :index="index" @close="index = null"></gallery>
                 
                 <!-- Container of infinite scroll using vue-infinite-scroll library -->
-                <div class="images-container" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
-                    <div
-                    class="images-card image-skew col-md-4 col-sm-6 col-xl-3 col-12"
+                <ul class="images-container" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="limit">
+                    <li
+                    class="images-card col-md-4 col-sm-6 col-xl-3 col-12"
                     v-for="(image, imageIndex) in images"
                     :key="imageIndex"
                     @click="index = imageIndex"
-                    :style="{ backgroundImage: 'url(' + image + ')', width: 'auto' }"
+                    :style="{ backgroundImage: 'url(' + image.url + ')', width: 'auto' }"
                     >
+                    <div class="imageinfo overlay">
+                        <span>{{ image.id }}</span>
+                        <img src="assets/img/logo-white.png"/>
+                        <p>{{ image.author }}</p>
                     </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
+    
 <!-- Scripts -->
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/vue.js"></script>
@@ -59,6 +64,7 @@
         data: function() {
         return {
             images: [],
+            download_url: [],
             limit: 9,
             busy: false,
             options: {
@@ -77,11 +83,10 @@
                 this.busy = true;   
                     axios.get(json).then(res => {
                         const append = res.data.slice(this.images.length,this.images.length + this.limit);
+                        this.images = this.images.concat(append);
                         append.forEach(item => {
-                            console.log('URL: ' + item.url);
-                            this.images = this.images.concat(item.url);
+                            this.download_url = this.download_url.concat( item.url );
                         });
-
                         this.busy = false;
                     }).catch( (err) => {
                         this.busy = false;
