@@ -23,6 +23,7 @@
                 
             <div class="row">
 
+                <!-- Show the images and info inside a gallery using a component -->
                 <gallery :images="download_url" :options="options" :index="index" @close="index = null"></gallery>
                 
                 <!-- Container of infinite scroll using vue-infinite-scroll library -->
@@ -32,7 +33,7 @@
                     v-for="(image, imageIndex) in images"
                     :key="imageIndex"
                     @click="index = imageIndex"
-                    :style="{ backgroundImage: 'url(' + image.url + ')', width: 'auto' }"
+                    :style="{ backgroundImage: 'url(' + image.download_url + ')', width: 'auto' }"
                     >
                     <div class="imageinfo overlay">
                         <span>{{ image.id }}</span>
@@ -56,8 +57,16 @@
 <script type="text/javascript" src="js/vue-gallery.js"></script>
 
 <script>
-    /* Loading de object's source */
+    /* Loading de object's source from localhost get a CORB (Cross Origin Request Blocked) error because the online source from unsplash does 
+    not allowed multi origin connections, instead of using unsplash I used the picsum download_url.
+    To allow cross origin request in need to be deployed from backend because all browsers locks a client cross origin requests from local
+    NOTE: Full images in gallery lightbox won't load because of CORB commented 
+    */
+    // const json = 'api/gradiAuthors.json';
+    
+    /* Use this local JSON to test lightbox on images */
     const json = 'api/gradiAuthors1.json';
+    
 
     new Vue({
     el: '#app',
@@ -65,7 +74,7 @@
         return {
             images: [],
             download_url: [],
-            limit: 9,
+            limit: 12,
             busy: false,
             options: {
                 fullScreen:false,
@@ -81,7 +90,10 @@
         loadMore() {
             if(! this.busy){
                 this.busy = true;   
-                    axios.get(json).then(res => {
+                    axios.get(json, {
+                        method: 'HEAD',
+		                mode: 'no-cors',
+                    }).then(res => {
                         const append = res.data.slice(this.images.length,this.images.length + this.limit);
                         this.images = this.images.concat(append);
                         append.forEach(item => {
