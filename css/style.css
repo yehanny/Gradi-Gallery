@@ -42,7 +42,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  width: 60%;
+  width: auto;
   height: 30%;
   margin: auto;
 }
@@ -163,20 +163,29 @@ ul li:hover .imageinfo {
   }
 }
 
-@media (min-width: 479px) and (max-width: 576px) {
+@media (min-width: 320px) and (max-width: 576px) {
   .images-card {
     height: 255px;
   }
   .logo-img img {
     max-width: 300px;
   }
-}
-
-@media (min-width: 320px) and (max-width: 479px) {
-  .images-card {
-    height: 265px;
+  .images-container {
+    margin-right: 25px;
   }
-  .logo-img img {
-    max-width: 300px;
+  ul li:hover {
+    transform: scale(1.0);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition:all .4s ease-in-out;
+    cursor: pointer;
+  }
+  ul li:hover .imageinfo {
+    opacity: 1;
+    transition: all .4 ease-in-out;
+  }
+  .images-card .overlay {
+    opacity: 1;
+    height: 240px;
   }
 }
